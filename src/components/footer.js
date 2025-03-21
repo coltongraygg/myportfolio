@@ -74,6 +74,7 @@ const Footer = () => {
     forks: null,
   });
 
+  
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production') {
       return;
