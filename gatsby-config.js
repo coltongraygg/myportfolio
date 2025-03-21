@@ -15,13 +15,17 @@ module.exports = {
     {
       resolve: `gatsby-plugin-image`,
       options: {
-        formats: ['webp', 'jpg'],
+        defaults: {
+          formats: ['auto', 'webp'],
+        },
       },
     },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
-        formats: ['webp', 'jpg'],
+        defaults: {
+          formats: ['auto', 'webp'],
+        },
       },
     },
     `gatsby-transformer-sharp`,
