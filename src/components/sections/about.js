@@ -125,7 +125,7 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Eleventy', 'Node.js', 'WordPress'];
+  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Express', 'Node.js', 'MySQL'];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -135,30 +135,24 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Colton and I enjoy creating things that live on the internet. My
-              interest in web development started back in 2012 when I decided to try editing custom
-              Tumblr themes — turns out hacking together a custom reblog button taught me a lot
-              about HTML &amp; CSS!
+              Hello! I’m Colton Gray, a software engineer ready to turn ideas into code. My path
+              started at The Dupuy Group, where I began building a subsidiary company’s site with
+              WordPress and then discovered Webflow, sparking my shift to JavaScript and full-stack
+              development.
             </p>
 
             <p>
-              Fast-forward to today, and I’ve had the privilege of working at{' '}
-              <a href="https://us.mullenlowe.com/">an advertising agency</a>,{' '}
-              <a href="https://starry.com/">a start-up</a>,{' '}
-              <a href="https://www.apple.com/">a huge corporation</a>, and{' '}
-              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. My
-              main focus these days is building accessible, inclusive products and digital
-              experiences at <a href="https://upstatement.com/">Upstatement</a> for a variety of
-              clients.
+              At Flipped Car Marketing, I co-founded the venture, built Webflow sites for clients,
+              and led marketing strategies for businesses like ERG Enterprises, NOLA Capital
+              Partners, <a href="https://houstonteaandbeverage.com/">Houston Tea & Beverage</a>,{' '}
+              <a href="https://iccnola.com/">International Coffee Company</a>,{' '}
+              <a href="https://www.delicioussips.com/">Delicious Sips</a>, and more.
             </p>
 
             <p>
-              I also recently{' '}
-              <a href="https://www.newline.co/courses/build-a-spotify-connected-app">
-                launched a course
-              </a>{' '}
-              that covers everything you need to build a web app with the Spotify API using Node
-              &amp; React.
+              Today, I’m developing <a href="https://www.ispwatchdog.com">ISP Watchdog</a>
+              {''}
+              —a tool delivering network insights to fight unreliable service.
             </p>
 
             <p>Here are a few technologies I’ve been working with recently:</p>
