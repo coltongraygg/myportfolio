@@ -144,7 +144,7 @@ const About = () => {
             <p>
               At Flipped Car Marketing, I co-founded the venture, built Webflow sites for clients,
               and led marketing strategies for businesses like ERG Enterprises, NOLA Capital
-              Partners, <a href="https://www.delicioussips.com/">Delicious Sips</a>,
+              Partners, <a href="https://www.delicioussips.com/">Delicious Sips</a>,{' '}
               <a href="https://iccnola.com/">International Coffee Company</a>,{' '}
               <a href="https://houstonteaandbeverage.com/">Houston Tea & Beverage</a>, and more.
             </p>
