@@ -10,6 +10,7 @@ tech:
   - Tailwind
   - Express
   - MySQL
+  - AWS
 ---
 
-A social app to spark adventure and confidence. Discover local events, tackle daily missions, and connect in real-time chat. With AI pep talks and gamified achievements, Flare helps you step out, level up, and own your social game.
+A social app I built with four other devs to get you out and exploring. Discover local events, tackle daily missions, chat in real-time, and get pep talks from an AI social coach.

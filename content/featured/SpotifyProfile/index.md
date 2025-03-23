@@ -1,15 +1,14 @@
 ---
 date: '2'
-title: 'Spotify Profile'
+title: 'Dogagatchi+'
 cover: './demo.png'
-github: 'https://github.com/bchiang7/spotify-profile'
-external: 'https://spotify-profile.herokuapp.com/'
+github: 'https://github.com/The-404s-Org/Dogagatchi'
+# external: 'https://spotify-profile.herokuapp.com/'
 tech:
   - React
-  - Styled Components
+  - Pixi.js
   - Express
-  - Spotify API
-  - Heroku
+  - MongoDB
 ---
 
-A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.
+A legacy Tamagotchi-inspired app I enhanced with two devs. Answer trivia for coins, care for pups, and trade with friends. We added voice training and Pixi.js battles against dog catchers for a caretaking-action upgrade.
