@@ -3,7 +3,7 @@ date: '3'
 title: 'Digi-Cry'
 cover: './course-card.png'
 external: 'https://github.com/The-404s-Org/digicry'
-cta: 'https://www.newline.co/courses/build-a-spotify-connected-app'
+# cta: 'https://www.newline.co/courses/build-a-spotify-connected-app'
 tech:
   - React
   - Chart.js
