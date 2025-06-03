@@ -125,7 +125,7 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Express', 'Node.js', 'MySQL'];
+  const skills = ['Elixir', 'Phoenix', 'TypeScript', 'React', 'Node.js', 'MySQL'];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -135,24 +135,17 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! I’m Colton Gray, a software engineer ready to turn ideas into code. My path
-              started at The Dupuy Group, where I began building a subsidiary company’s site with
-              WordPress and then discovered Webflow, sparking my shift to JavaScript and full-stack
-              development.
+            I'm Colton Gray, a software engineer who started out building websites on the job. I was working on a WordPress site at The Dupuy Group when I came across Webflow, picked it up, and kept going—handling wireframes, DNS setup, analytics integration, SEO research, and whatever else came up.
             </p>
 
             <p>
-              At Flipped Car Marketing, I co-founded the venture, built Webflow sites for clients,
-              and led marketing strategies for businesses like ERG Enterprises, NOLA Capital
-              Partners, <a href="https://www.delicioussips.com/">Delicious Sips</a>,{' '}
-              <a href="https://iccnola.com/">International Coffee Company</a>,{' '}
-              <a href="https://houstonteaandbeverage.com/">Houston Tea & Beverage</a>, and more.
+            Later I co-founded Flipped Car Marketing and led projects for a range of local clients. Most of it was Webflow work, but I got more curious about how web apps actually work. I started learning JavaScript, got deeper into software, and eventually went through Operation Spark’s Immersion Senior program.
             </p>
 
             <p>
-              Today, I’m developing <a href="https://www.ispwatchdog.com">ISP Watchdog</a>
+              Now I’m working on <a href="https://www.ispwatchdog.com">ISP Watchdog</a>,
               {''}
-              —a tool delivering network insights to fight unreliable service.
+              a hardware-backed diagnostics tool that tracks internet issues and shows exactly when and where things go wrong.
             </p>
 
             <p>Here are a few technologies I’ve been working with recently:</p>

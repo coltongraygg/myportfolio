@@ -61,23 +61,23 @@ const Hero = () => {
 
   const one = <h1>Hi, my name is</h1>;
   const two = <h2 className="big-heading">Colton Gray.</h2>;
-  const three = <h3 className="big-heading">I turn ideas into action.</h3>;
+  const three = <h3 className="big-heading">I build useful stuff.</h3>;
   const four = (
     <>
       <p>
-        I'm a developer who thrives on building practical, powerful applications. From social
-        platforms to voice-powered pet sims, I specialize in full-stack solutions. Right now, I'm
-        working on{' '}
+      Most of what I work on starts with a simple question: “Why does this still suck?”
+      I’ve built tools to make everyday friction disappear—finding local events, tracking habits, debugging bad internet.
+      Right now, I'm focused on{' '}
         <a href="https://ispwatchdog.com/" target="_blank" rel="noreferrer">
           ISP Watchdog
         </a>
-        —your weapon against unreliable internet.
+        a plug-and-play device that shows when your connection drops and why.
       </p>
     </>
   );
   const five = (
     <a className="email-link" href="https://www.ispwatchdog.com" target="_blank" rel="noreferrer">
-      Get in on ISP Watchdog early!
+      See the new homepage
     </a>
   );
 
