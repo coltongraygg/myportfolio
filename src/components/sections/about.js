@@ -144,7 +144,7 @@ const About = () => {
 
             <p>
               Now I’m working on <a href="https://www.ispwatchdog.com">ISP Watchdog</a>
-              {,''}
+              {,' '}
               a hardware-backed diagnostics tool that tracks internet issues and shows exactly when and where things go wrong.
             </p>
 
