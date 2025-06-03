@@ -135,17 +135,23 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-            I'm Colton Gray, a software engineer who started out building websites on the job. I was working on a WordPress site at The Dupuy Group when I came across Webflow, picked it up, and kept going—handling wireframes, DNS setup, analytics integration, SEO research, and whatever else came up.
+              I'm Colton Gray, a software engineer who started out building websites on the job. I
+              was working on a WordPress site at The Dupuy Group when I came across Webflow, picked
+              it up, and kept going—handling wireframes, DNS setup, analytics integration, SEO
+              research, and whatever else came up.
             </p>
 
             <p>
-            Later I co-founded Flipped Car Marketing and led projects for a range of local clients. Most of it was Webflow work, but I got more curious about how web apps actually work. I started learning JavaScript, got deeper into software, and eventually went through Operation Spark’s Immersion Senior program.
+              Later I co-founded Flipped Car Marketing and led projects for a range of local
+              clients. Most of it was Webflow work, but I got more curious about how web apps
+              actually work. I started learning JavaScript, got deeper into software, and eventually
+              went through Operation Spark’s Immersion Senior program.
             </p>
 
             <p>
               Now I’m working on <a href="https://www.ispwatchdog.com">ISP Watchdog</a>
-              {,' '}
-              a hardware-backed diagnostics tool that tracks internet issues and shows exactly when and where things go wrong.
+              {', '}a hardware-backed diagnostics tool that tracks internet issues and shows exactly
+              when and where things go wrong.
             </p>
 
             <p>Here are a few technologies I’ve been working with recently:</p>
