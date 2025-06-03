@@ -69,7 +69,7 @@ const Hero = () => {
       I’ve built tools to make everyday friction disappear—finding local events, tracking habits, debugging bad internet.
       Right now, I'm focused on{' '}
         <a href="https://ispwatchdog.com/" target="_blank" rel="noreferrer">
-          ISP Watchdog
+          ISP Watchdog {''}
         </a>
         a plug-and-play device that shows when your connection drops and why.
       </p>
