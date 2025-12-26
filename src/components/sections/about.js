@@ -1,9 +1,29 @@
-import React, { useEffect, useRef } from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
+
+// Face tracker configuration
+const P_MIN = -15;
+const P_MAX = 15;
+const STEP = 3;
+const SIZE = 256;
+
+const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+const quantizeToGrid = val => {
+  const raw = P_MIN + ((val + 1) * (P_MAX - P_MIN)) / 2;
+  const snapped = Math.round(raw / STEP) * STEP;
+  return clamp(snapped, P_MIN, P_MAX);
+};
+
+const sanitize = val => {
+  const str = Number(val).toFixed(1);
+  return str.replace('-', 'm').replace('.', 'p');
+};
+
+const gridToFilename = (px, py) => `gaze_px${sanitize(px)}_py${sanitize(py)}_${SIZE}.webp`;
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -115,7 +135,31 @@ const StyledPic = styled.div`
 
 const About = () => {
   const revealContainer = useRef(null);
+  const faceContainerRef = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  // Initialize with center-looking image
+  const [faceSrc, setFaceSrc] = useState('/faces/gaze_px0p0_py0p0_256.webp');
+
+  const updateFaceFromClient = useCallback((clientX, clientY) => {
+    if (!faceContainerRef.current) {return;}
+
+    const rect = faceContainerRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const nx = (clientX - centerX) / (rect.width / 2);
+    const ny = (centerY - clientY) / (rect.height / 2);
+
+    const clampedX = clamp(nx, -1, 1);
+    const clampedY = clamp(ny, -1, 1);
+
+    const px = quantizeToGrid(clampedX);
+    const py = quantizeToGrid(clampedY);
+
+    const filename = gridToFilename(px, py);
+    setFaceSrc(`/faces/${filename}`);
+  }, []);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -125,7 +169,41 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['Elixir', 'Phoenix', 'TypeScript', 'React', 'Node.js', 'MySQL'];
+  useEffect(() => {
+    if (prefersReducedMotion) {return;}
+
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    const handleMouseMove = e => updateFaceFromClient(e.clientX, e.clientY);
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      // Map scroll position to -1 (top) to 1 (bottom)
+      const normalizedY = maxScroll > 0 ? (scrollY / maxScroll) * 2 - 1 : 0;
+      // Invert: scrolling down = looking down (negative py)
+      const py = quantizeToGrid(-normalizedY);
+      const filename = gridToFilename(0, py);
+      setFaceSrc(`/faces/${filename}`);
+    };
+
+    if (isTouchDevice) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll(); // Initialize on load
+    } else {
+      window.addEventListener('mousemove', handleMouseMove);
+    }
+
+    return () => {
+      if (isTouchDevice) {
+        window.removeEventListener('scroll', handleScroll);
+      } else {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, [prefersReducedMotion, updateFaceFromClient]);
+
+  const skills = ['TypeScript', 'Next.js', 'tRPC', 'Prisma', 'AI SDK', 'Claude Code'];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -135,26 +213,28 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              I'm Colton Gray, a software engineer who started out building websites on the job. I
-              was working on a WordPress site at The Dupuy Group when I came across Webflow, picked
-              it up, and kept going—handling wireframes, DNS setup, analytics integration, SEO
-              research, and whatever else came up.
+              I'm a software engineer at Rotolo Consultants who genuinely just loves building stuff.
+              Code is a means to an end for me—the end being solving problems and shipping things.
+              Every bad UX interaction I have on the internet makes me want to build something
+              better.
             </p>
 
             <p>
-              Later I co-founded Flipped Car Marketing and led projects for a range of local
-              clients. Most of it was Webflow work, but I got more curious about how web apps
-              actually work. I started learning JavaScript, got deeper into software, and eventually
-              went through Operation Spark’s Immersion Senior program.
+              I obsess over user experience and love making product decisions—figuring out patterns,
+              designing features, thinking through how things should work. I'm constantly
+              prototyping and shipping, whether it's a silly idea or something serious.
             </p>
 
             <p>
-              Now I’m working on <a href="https://www.ispwatchdog.com">ISP Watchdog</a>
-              {', '}a hardware-backed diagnostics tool that tracks internet issues and shows exactly
-              when and where things go wrong.
+              Lately I've been deep in{' '}
+              <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noreferrer">
+                Claude Code
+              </a>
+              , building my own plugins and agents to automate everything I can. It's been amazing
+              for rapid prototyping and iterating on ideas quickly.
             </p>
 
-            <p>Here are a few technologies I’ve been working with recently:</p>
+            <p>Here's what I've been working with lately:</p>
           </div>
 
           <ul className="skills-list">
@@ -163,15 +243,8 @@ const About = () => {
         </StyledText>
 
         <StyledPic>
-          <div className="wrapper">
-            <StaticImage
-              className="img"
-              src="../../images/me.jpg"
-              width={500}
-              quality={95}
-              formats={['AUTO', 'WEBP', 'AVIF']}
-              alt="Headshot"
-            />
+          <div className="wrapper" ref={faceContainerRef}>
+            <img className="img" src={faceSrc} alt="Headshot" />
           </div>
         </StyledPic>
       </div>

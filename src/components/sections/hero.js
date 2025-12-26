@@ -65,19 +65,22 @@ const Hero = () => {
   const four = (
     <>
       <p>
-        Most of what I work on starts with a simple question: “Why does this still suck?” I’ve built
-        tools to make everyday friction disappear—finding local events, tracking habits, debugging
-        bad internet. Right now, I'm focused on{' '}
-        <a href="https://ispwatchdog.com/" target="_blank" rel="noreferrer">
-          ISP Watchdog
+        I'm a software engineer who loves shipping. Currently deep in Claude Code, building plugins
+        and agents to automate my workflows. My latest project is{' '}
+        <a href="https://gabagool-bench.vercel.app/" target="_blank" rel="noreferrer">
+          Gabagool Bench
         </a>
-        , a plug-and-play device that shows when your connection drops and why.
+        —a Sopranos-themed LLM benchmark that tests how AI models handle morally complex scenarios.
       </p>
     </>
   );
   const five = (
-    <a className="email-link" href="https://www.ispwatchdog.com" target="_blank" rel="noreferrer">
-      See the new homepage
+    <a
+      className="email-link"
+      href="https://gabagool-bench.vercel.app/"
+      target="_blank"
+      rel="noreferrer">
+      Check out Gabagool Bench
     </a>
   );
 
