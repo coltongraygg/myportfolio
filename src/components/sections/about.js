@@ -133,9 +133,17 @@ const generatePath = (fromPx, fromPy, toPx, toPy) => {
 
   while (x !== toPx || y !== toPy) {
     // Move one step closer on each axis
-    if (x < toPx) {x += STEP;} else if (x > toPx) {x -= STEP;}
+    if (x < toPx) {
+      x += STEP;
+    } else if (x > toPx) {
+      x -= STEP;
+    }
 
-    if (y < toPy) {y += STEP;} else if (y > toPy) {y -= STEP;}
+    if (y < toPy) {
+      y += STEP;
+    } else if (y > toPy) {
+      y -= STEP;
+    }
 
     path.push([x, y]);
   }
@@ -338,7 +346,9 @@ const About = () => {
     let accumulated = 0;
 
     const animate = timestamp => {
-      if (!lastTime) {lastTime = timestamp;}
+      if (!lastTime) {
+        lastTime = timestamp;
+      }
       const delta = timestamp - lastTime;
       lastTime = timestamp;
       accumulated += delta;
@@ -368,7 +378,9 @@ const About = () => {
 
     return () => {
       if (isTouchDevice) {
-        if (animationId) {cancelAnimationFrame(animationId);}
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+        }
       } else {
         window.removeEventListener('mousemove', handleMouseMove);
       }
@@ -406,7 +418,7 @@ const About = () => {
               for rapid prototyping and iterating on ideas quickly.
             </p>
 
-            <p>Here's what I've been working with lately:</p>
+            <p>Here's what I've been working with:</p>
           </div>
 
           <ul className="skills-list">
