@@ -35,6 +35,142 @@ const preloadFaceImages = () => {
   }
 };
 
+// "Curious Observer" animation sequence for mobile
+// Each keyframe: [px, py, duration in ms]
+// Duration is the total time to interpolate TO this position
+const FACE_ANIMATION_KEYFRAMES = [
+  // Quick scan left-right
+  [0, 0, 200],
+  [-15, 0, 250],
+  [15, 0, 300],
+  [0, 0, 200],
+  // Dart up-right, track something
+  [12, -12, 150],
+  [15, -15, 100],
+  [15, -15, 300], // Hold - spotted something!
+  [9, -9, 150],
+  [3, -3, 150],
+  [-6, 6, 200],
+  [-12, 9, 150],
+  [-15, 12, 150],
+  // Quick double-take
+  [0, 0, 100],
+  [-9, -6, 100],
+  [0, 0, 100],
+  [-9, -6, 150],
+  [-9, -6, 250], // Hold
+  // Full eye roll
+  [-15, 0, 150],
+  [-15, -9, 150],
+  [-9, -15, 150],
+  [0, -15, 150],
+  [9, -15, 150],
+  [15, -9, 150],
+  [15, 0, 150],
+  [9, 9, 150],
+  [0, 12, 150],
+  [-6, 6, 150],
+  // Intense focus center
+  [0, 0, 100],
+  [0, 0, 600], // Eye contact hold
+  // Startled look around
+  [15, -15, 100],
+  [-15, -15, 150],
+  [-15, 15, 150],
+  [15, 15, 150],
+  [15, -15, 150],
+  [0, 0, 100],
+  // Reading something left to right
+  [-15, -3, 200],
+  [-9, -3, 150],
+  [-3, -3, 150],
+  [3, -3, 150],
+  [9, -3, 150],
+  [15, -3, 150],
+  // New line
+  [-15, 0, 100],
+  [-9, 0, 150],
+  [-3, 0, 150],
+  [3, 0, 150],
+  [9, 0, 150],
+  [15, 0, 150],
+  // Bored look up
+  [0, -15, 300],
+  [0, -15, 400], // Hold - thinking
+  [3, -12, 200],
+  [-3, -12, 200],
+  // Quick glances
+  [-15, 6, 100],
+  [15, -6, 150],
+  [-12, -12, 100],
+  [12, 12, 150],
+  [0, 0, 100],
+  // Suspicious squint (small movements)
+  [-3, 0, 200],
+  [-6, -3, 200],
+  [-6, -3, 300], // Hold
+  [0, 0, 150],
+  // Big sweep
+  [-15, -15, 200],
+  [0, -15, 150],
+  [15, -15, 150],
+  [15, 0, 150],
+  [15, 15, 150],
+  [0, 15, 150],
+  [-15, 15, 150],
+  [-15, 0, 150],
+  [-15, -15, 150],
+  // Return center
+  [0, 0, 200],
+  [0, 0, 300], // Brief rest
+];
+
+// Generate smooth path between two positions using Bresenham-style stepping
+const generatePath = (fromPx, fromPy, toPx, toPy) => {
+  const path = [];
+  let x = fromPx;
+  let y = fromPy;
+
+  while (x !== toPx || y !== toPy) {
+    // Move one step closer on each axis
+    if (x < toPx) {x += STEP;} else if (x > toPx) {x -= STEP;}
+
+    if (y < toPy) {y += STEP;} else if (y > toPy) {y -= STEP;}
+
+    path.push([x, y]);
+  }
+
+  // Ensure we have at least one frame (for holds)
+  if (path.length === 0) {
+    path.push([toPx, toPy]);
+  }
+
+  return path;
+};
+
+// Build the full animation with all grid positions
+const buildFullAnimation = () => {
+  const frames = [];
+  let prevPx = 0;
+  let prevPy = 0;
+
+  for (const [toPx, toPy, duration] of FACE_ANIMATION_KEYFRAMES) {
+    const path = generatePath(prevPx, prevPy, toPx, toPy);
+    const timePerFrame = duration / path.length;
+
+    for (const [px, py] of path) {
+      frames.push({ px, py, duration: timePerFrame });
+    }
+
+    prevPx = toPx;
+    prevPy = toPy;
+  }
+
+  return frames;
+};
+
+const ANIMATION_FRAMES = buildFullAnimation();
+
 const StyledAboutSection = styled.section`
   max-width: 900px;
 
@@ -195,33 +331,44 @@ const About = () => {
 
     const handleMouseMove = e => updateFaceFromClient(e.clientX, e.clientY);
 
-    const handleScroll = () => {
-      if (!faceContainerRef.current) {return;}
+    // Animation loop for mobile (uses full grid path for smooth movement)
+    let frameIndex = 0;
+    let animationId = null;
+    let lastTime = 0;
+    let accumulated = 0;
 
-      const rect = faceContainerRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
+    const animate = timestamp => {
+      if (!lastTime) {lastTime = timestamp;}
+      const delta = timestamp - lastTime;
+      lastTime = timestamp;
+      accumulated += delta;
 
-      // Calculate where the face is in the viewport (0 = top, 1 = bottom)
-      const faceCenter = rect.top + rect.height / 2;
-      const normalizedY = (faceCenter / viewportHeight) * 2 - 1;
+      const frame = ANIMATION_FRAMES[frameIndex];
 
-      // Clamp and quantize: face at bottom of viewport = look up, top = look down
-      const clampedY = clamp(normalizedY, -1, 1);
-      const py = quantizeToGrid(clampedY);
-      const filename = gridToFilename(0, py);
-      setFaceSrc(`/faces/${filename}`);
+      if (accumulated >= frame.duration) {
+        accumulated = 0;
+        frameIndex = (frameIndex + 1) % ANIMATION_FRAMES.length;
+
+        const nextFrame = ANIMATION_FRAMES[frameIndex];
+        const filename = gridToFilename(nextFrame.px, nextFrame.py);
+        setFaceSrc(`/faces/${filename}`);
+      }
+
+      animationId = requestAnimationFrame(animate);
     };
 
     if (isTouchDevice) {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll(); // Initialize on load
+      // Set initial frame
+      const firstFrame = ANIMATION_FRAMES[0];
+      setFaceSrc(`/faces/${gridToFilename(firstFrame.px, firstFrame.py)}`);
+      animationId = requestAnimationFrame(animate);
     } else {
       window.addEventListener('mousemove', handleMouseMove);
     }
 
     return () => {
       if (isTouchDevice) {
-        window.removeEventListener('scroll', handleScroll);
+        if (animationId) {cancelAnimationFrame(animationId);}
       } else {
         window.removeEventListener('mousemove', handleMouseMove);
       }
@@ -238,10 +385,10 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              I'm a software engineer at Rotolo Consultants who genuinely just loves building stuff.
-              Code is a means to an end for me—the end being solving problems and shipping things.
-              Every bad UX interaction I have on the internet makes me want to build something
-              better.
+              I'm a software engineer at Rotolo Consultants, who genuinely just loves building
+              stuff. Code is a means to an end for me—the end being solving problems and shipping
+              things. Every bad UX interaction I have on the internet makes me want to build
+              something better.
             </p>
 
             <p>
@@ -251,7 +398,7 @@ const About = () => {
             </p>
 
             <p>
-              Lately I've been deep in{' '}
+              Lately, I've been deep in{' '}
               <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noreferrer">
                 Claude Code
               </a>

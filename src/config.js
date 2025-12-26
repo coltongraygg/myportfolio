@@ -1,5 +1,5 @@
 module.exports = {
-  email: 'colton@graycoding.dev.com',
+  email: 'colton@graycoding.dev',
 
   socialMedia: [
     {
