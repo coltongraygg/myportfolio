@@ -196,12 +196,18 @@ const About = () => {
     const handleMouseMove = e => updateFaceFromClient(e.clientX, e.clientY);
 
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      // Map scroll position to -1 (top) to 1 (bottom)
-      const normalizedY = maxScroll > 0 ? (scrollY / maxScroll) * 2 - 1 : 0;
-      // Invert: scrolling down = looking down (negative py)
-      const py = quantizeToGrid(-normalizedY);
+      if (!faceContainerRef.current) {return;}
+
+      const rect = faceContainerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Calculate where the face is in the viewport (0 = top, 1 = bottom)
+      const faceCenter = rect.top + rect.height / 2;
+      const normalizedY = (faceCenter / viewportHeight) * 2 - 1;
+
+      // Clamp and quantize: face at bottom of viewport = look up, top = look down
+      const clampedY = clamp(normalizedY, -1, 1);
+      const py = quantizeToGrid(clampedY);
       const filename = gridToFilename(0, py);
       setFaceSrc(`/faces/${filename}`);
     };
