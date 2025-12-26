@@ -25,6 +25,16 @@ const sanitize = val => {
 
 const gridToFilename = (px, py) => `gaze_px${sanitize(px)}_py${sanitize(py)}_${SIZE}.webp`;
 
+// Preload all face images
+const preloadFaceImages = () => {
+  for (let px = P_MIN; px <= P_MAX; px += STEP) {
+    for (let py = P_MIN; py <= P_MAX; py += STEP) {
+      const img = new Image();
+      img.src = `/faces/${gridToFilename(px, py)}`;
+    }
+  }
+};
+
 const StyledAboutSection = styled.section`
   max-width: 900px;
 
@@ -142,7 +152,9 @@ const About = () => {
   const [faceSrc, setFaceSrc] = useState('/faces/gaze_px0p0_py0p0_256.webp');
 
   const updateFaceFromClient = useCallback((clientX, clientY) => {
-    if (!faceContainerRef.current) {return;}
+    if (!faceContainerRef.current) {
+      return;
+    }
 
     const rect = faceContainerRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -169,8 +181,15 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
+  // Preload face images on mount
   useEffect(() => {
-    if (prefersReducedMotion) {return;}
+    preloadFaceImages();
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      return;
+    }
 
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
