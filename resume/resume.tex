@@ -1,0 +1,204 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ disproportionally parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Colton Gray} \\ \vspace{1pt}
+    \small New Orleans, LA (Willing to relocate) \\ \vspace{1pt}
+    \small 601-594-1056 $|$
+    \href{mailto:colton@graycoding.dev}{{colton@graycoding.dev}} $|$
+    \textbf{\href{https://www.linkedin.com/in/coltong/}{LinkedIn}} $|$
+    \textbf{\href{https://github.com/coltongraygg}{GitHub}} $|$
+    \textbf{\href{https://graycoding.dev}{Portfolio}}
+\end{center}
+
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+\textbf{Languages \& Runtimes:} Elixir, TypeScript, JavaScript, Node.js \\
+\textbf{Frameworks \& Libraries:} Phoenix, React, Express.js, Tailwind, Finsweet \\
+\textbf{Databases:} MySQL, SQLite, MongoDB, Ecto, Sequelize, Mongoose \\
+\textbf{DevOps \& Infrastructure:} Docker, AWS S3, AWS EC2, Google Cloud, NGINX, DNS Management \\
+\textbf{Tools:} Git, GitHub Actions, Mocha, Jest, Webflow, Figma, Adobe Suite
+    }}
+\end{itemize}
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+
+
+
+    \resumeProjectHeading
+          {\textbf{\href{https://ispwatchdog.com/}{\underline{ISP Watchdog}}} $|$ \emph{IoT platform to monitor network performance and generate diagnostic reports}}{May 2025}
+
+          \resumeItemListStart
+            \resumeItem{Built a distributed diagnostics tool in \textbf{Elixir} using \textbf{OTP} primitives (GenServer, Supervisor, Application) for a fault-tolerant, self-recovering runtime.}
+            \resumeItem{Packaged \& deployed the Elixir system with \textbf{Docker}, including embedded network tools, volume-mounted configs, and headless edge deployment on \textbf{Raspberry Pi}.}
+            \resumeItem{Built a dual-layer diagnostics pipeline with GenServer-based \textbf{MTR} and \textbf{ICMP} ping runners, parsing system command output into \textbf{Elixir} structs, tracking outage state, and persisting results using \textbf{Ecto} and \textbf{SQLite}.}
+            \resumeItem{Developed MTR hop analysis to infer outage root causes using rule-based logic across multiple hops, and annotated diagnostic records in the database for downstream consumption.}
+          \resumeItemListEnd
+
+
+
+
+
+
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/the-full-stack-attack/flare}{\underline{Flare}}} $|$ \emph{Social platform to overcome anxiety with daily tasks, local events, \& AI-powered coaching}}{Feb 2025}
+
+          \resumeItemListStart
+            \resumeItem{Built a venue data system using \textbf{TypeScript} \& \textbf{Express} that combines \textbf{Foursquare} \& \textbf{Google Business} data, with user flags for missing data, reducing user manual input by \textbf{50\%} for 1000's of venues.}
+
+            \resumeItem{Built an avatar creation interface using \textbf{DiceBear} API, implementing real-time preview generation \& state management for customization options through \textbf{React}’s useState \& useEffect hooks, enabling \textbf{23 million} unique avatar combinations for user personalization.}
+
+            \resumeItem{Implemented error handling \& retry mechanisms for external service failures, ensuring graceful degradation \& data consistency across API calls.}
+          \resumeItemListEnd
+
+
+
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/The-404s-Org/digicry}{\underline{Digi-Cry}}} $|$ \emph{Mental health journaling application featuring sentiment analysis \& local event discovery}}{Dec 2024}
+
+          \resumeItemListStart
+            \resumeItem{Built a sentiment analysis system using \textbf{Google's Natural Language} API, implementing custom data normalization algorithms with min-max scaling to convert raw sentiment scores into a standardized scale, with personalized user baselines based on historical emotional expression patterns.}
+            \resumeItem{Implemented a geolocation service using \textbf{Google Maps} API for reverse geocoding, converting user coordinates into city-level data, enabling local event recommendations through \textbf{SERP} API integration.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Co-Founder \& Webflow Developer}{Aug 2020 -- Sep 2024}
+      {Flipped Car Marketing}{New Orleans, Louisiana}
+      \resumeItemListStart
+
+
+        \resumeItem{Led end-to-end \textbf{Webflow} development for client websites, including requirements gathering, wireframing, site architecture planning, and responsive builds. Managed iterative design reviews and client feedback cycles from initial discovery to final launch.}
+
+        \resumeItem{Implemented advanced Webflow functionality using \textbf{Finsweet} libraries and custom \textbf{JavaScript} to deliver performant, interactive user experiences tailored to each client's needs.}
+
+
+
+        \resumeItem{Handled full-stack web integrations, connecting Google Analytics, Facebook Pixel, Salesforce, and setting up DNS records, custom domains, and email routing for client websites.}
+
+
+        \resumeItem{Executed marketing solutions across ERG Ent., Houston Tea \& Beverage, International Coffee Co., NOLA Capital Partners, \& more.}
+
+
+
+      \resumeItemListEnd
+
+
+
+  \resumeSubHeadingListEnd
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {IBC Fundamentals of JS, Functional Programming, \& Web Development Level 3}{March 2025}
+      {Operation Spark | Immersion Senior}{}
+
+    \resumeSubheading
+      {Coursework in Music Industry Studies}{2016 -- 2017}
+      {Loyola University New Orleans}{}
+  \resumeSubHeadingListEnd
+
+%-------------------------------------------
+\end{document}
