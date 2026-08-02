@@ -61,16 +61,17 @@ const Hero = () => {
 
   const one = <h1>Hi, my name is</h1>;
   const two = <h2 className="big-heading">Colton Gray.</h2>;
-  const three = <h3 className="big-heading">I build useful stuff.</h3>;
+  const three = <h3 className="big-heading">I build agents that run in production.</h3>;
   const four = (
     <>
       <p>
-        I'm a software engineer who loves shipping. Currently deep in Claude Code, building plugins
-        and agents to automate my workflows. My latest project is{' '}
+        I'm an agent engineer at Rotolo Consultants, building AI agents that run in production
+        across sales, marketing, and internal ops—plus the evals and cost tracking that keep them
+        honest. My latest side project is{' '}
         <a href="https://gabagool-bench.vercel.app/" target="_blank" rel="noreferrer">
           Gabagool Bench
         </a>
-        —a Sopranos-themed LLM benchmark that tests how AI models handle morally complex scenarios.
+        —a Sopranos-themed LLM benchmark that tests how 40+ models handle morally complex scenarios.
       </p>
     </>
   );
