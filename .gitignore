@@ -9,3 +9,7 @@ package-lock.json
 .DS_Store
 
 .vscode/
+.gstack/
+
+# Local LaTeX live-preview tooling (not part of the site build)
+resume/preview/

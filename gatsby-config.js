@@ -4,8 +4,8 @@ module.exports = {
   siteMetadata: {
     title: 'Colton Gray',
     description:
-      'Colton Gray is a software engineer who specializes in building exceptional digital experiences.',
-    siteUrl: 'https://coltongray.dev', // No trailing slash allowed!
+      'Colton Gray is an agent engineer in New Orleans building AI agents that run in production — with the evals and cost instrumentation to prove they work.',
+    siteUrl: 'https://graycoding.dev', // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
     // @ignore
     // twitterUsername: '@coltongraygg',

@@ -387,7 +387,16 @@ const About = () => {
     };
   }, [prefersReducedMotion, updateFaceFromClient]);
 
-  const skills = ['TypeScript', 'Next.js', 'tRPC', 'Prisma', 'AI SDK', 'Claude Code'];
+  const skills = [
+    'TypeScript',
+    'Python',
+    'eve',
+    'Mastra',
+    'AI SDK',
+    'Next.js',
+    'FastAPI',
+    'PostgreSQL',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -397,25 +406,23 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              I'm a software engineer at Rotolo Consultants, who genuinely just loves building
-              stuff. Code is a means to an end for me—the end being solving problems and shipping
-              things. Every bad UX interaction I have on the internet makes me want to build
-              something better.
+              I'm an agent engineer at Rotolo Consultants, who genuinely just loves building stuff.
+              Code is a means to an end for me—the end being solving problems and shipping things.
             </p>
 
             <p>
-              I obsess over user experience and love making product decisions—figuring out patterns,
-              designing features, thinking through how things should work. I'm constantly
-              prototyping and shipping, whether it's a silly idea or something serious.
-            </p>
-
-            <p>
-              Lately, I've been deep in{' '}
+              Lately that's meant building agents that hold up outside a demo: evaluation loops that
+              catch their own regressions, per-run cost attribution, and{' '}
               <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noreferrer">
                 Claude Code
-              </a>
-              , building my own plugins and agents to automate everything I can. It's been amazing
-              for rapid prototyping and iterating on ideas quickly.
+              </a>{' '}
+              plugins that let non-technical teams run agent workflows themselves.
+            </p>
+
+            <p>
+              I also obsess over user experience and love making product decisions—figuring out
+              patterns, designing features, thinking through how things should work. Every bad UX
+              interaction I have on the internet makes me want to build something better.
             </p>
 
             <p>Here's what I've been working with:</p>
